@@ -5,7 +5,7 @@ export const storeData = (storeType: string, data: any) => {
 }
 
 export const retrieveData = (retrieveType: string) => {
-    return JSON.parse(localStorage.getItem(retrieveType) || '');
+    return localStorage.getItem(retrieveType) ? JSON.parse(localStorage.getItem(retrieveType) || '') : null;
 }
 
 export const clearData = () => {
