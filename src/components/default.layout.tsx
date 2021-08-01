@@ -6,7 +6,10 @@ import Paper from '@material-ui/core/Paper';
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
-      marginTop: '30px',
+      margin: '30px 0px 30px 0px',
+      [theme.breakpoints.down('sm')]: {
+        margin: '0px',
+      },
     },
     paper: {
       padding: theme.spacing(2),

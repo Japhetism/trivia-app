@@ -34,7 +34,7 @@ const ResultView = (props: any) => {
                 <Grid item xs>
                     <Typography gutterBottom variant="h3" className={classes.title}>
                         You scored<br />
-                        {`${scores}/${answers.length}`}
+                        {`${scores} / ${answers.length}`}
                     </Typography>
                 </Grid>
             </Grid>
