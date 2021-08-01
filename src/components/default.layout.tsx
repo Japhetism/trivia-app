@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
     },
     layout: {
         textAlign: 'center',
+        minHeight: 500,
     },
 }));
 

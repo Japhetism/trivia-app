@@ -12,15 +12,22 @@ export const QuizContainer = (props: any) => {
     const [activeQuestion, setActiveQuestion] = useState(0);
     const [answers, setAnswers] = useState([]);
     const [questions, setQuestions] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         clearData();
+        setIsLoading(true);
         QuestionsService.fetchQuestions(dispatch);
     }, [dispatch]);
 
     useEffect(() => {
+        console.log(defaultState);
         const questions = defaultState?.questionsData?.questions?.results;
-        setQuestions(questions);
+        const isLoading = defaultState?.questionData?.loading;
+        setTimeout(() => {
+            setQuestions(questions);
+            setIsLoading(isLoading);
+        }, 1000);
     }, [defaultState])
 
     const handleAnswers = (index: number, question: any, answer: string) => {
@@ -43,5 +50,5 @@ export const QuizContainer = (props: any) => {
         props.history.push("/result");
     }
 
-    return <QuizView questions={questions} activeQuestion={activeQuestion} handleAnswers={handleAnswers} />
+    return <QuizView questions={questions} activeQuestion={activeQuestion} handleAnswers={handleAnswers} isLoading={isLoading} />
 }
