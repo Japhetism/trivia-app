@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import DefaultLayout from '../../components/default.layout';
 import { 
     List, ListItem, ListItemIcon, ListItemText, Typography, Grid, makeStyles
 } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
 import { Link } from 'react-router-dom';
+import parse from 'html-react-parser';
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -20,17 +23,19 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const ResultView = () => {
+const ResultView = (props: any) => {
 
     const classes = useStyles();
+
+    const { scores, answers } = props;
 
     return <DefaultLayout>
         <Grid item xs={12} container>
             <Grid item xs container direction="column" spacing={2}>
                 <Grid item xs>
                     <Typography gutterBottom variant="h3" className={classes.title}>
-                        Your scored<br />
-                        3 / 10
+                        You scored<br />
+                        {`${scores}/${answers.length}`}
                     </Typography>
                 </Grid>
             </Grid>
@@ -39,12 +44,12 @@ const ResultView = () => {
             <Grid item xs container direction="column" spacing={2}>
                 <Grid item xs>
                     <List>
-                    {[1,2,3,4,5,6].map((link, index) => (
-                        <ListItem button key={link}>
+                    {answers.map((answer: any, index: number) => (
+                        <ListItem button key={Math.random()}>
                             <ListItemIcon>
-                                {/* {<img src={link.icon} alt="" className={classes.image} />} */}
-                                </ListItemIcon>
-                            <ListItemText primary={link} />
+                                {answer.answer === 'correct' ? <AddIcon /> : <RemoveIcon />}
+                            </ListItemIcon>
+                            <ListItemText primary={parse(answer.question)} />
                         </ListItem>
                     ))}
                     </List>

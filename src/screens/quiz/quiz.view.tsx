@@ -38,11 +38,12 @@ const QuizView = (props: any) => {
     const classes = useStyles();
     const [questions, setQuestions] = useState([]);
 
-    const {activeQuestion, handleAnswers} = props;
+    const {activeQuestion, handleAnswers, setTotalQuestions} = props;
 
     useEffect(()=> {
         const questions = props?.questions?.questionsData?.questions?.results;
         setQuestions(questions);
+        setTotalQuestions(questions?.length);
     }, [props]);
 
     return <DefaultLayout>
