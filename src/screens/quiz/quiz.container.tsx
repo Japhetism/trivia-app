@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import QuizView from './quiz.view';
 import QuestionsService from '../../services/questions.service';
 import { storeData } from '../../utils/helper';
-import { Redirect } from 'react-router';
+import { clearData } from '../../utils/helper';
 
 export const QuizContainer = (props: any) => {
 
@@ -15,6 +15,7 @@ export const QuizContainer = (props: any) => {
     const [totalQuestions, setTotalQuestions] = useState(0);
 
     useEffect(() => {
+        clearData();
         QuestionsService.fetchQuestions(dispatch);
     }, [dispatch]);
 
