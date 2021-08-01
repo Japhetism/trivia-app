@@ -3,10 +3,9 @@ import HomeView from './home.view';
 import { clearData } from '../../utils/helper';
 
 export const HomeContainer = () => {
+  useEffect(() => {
+    clearData();
+  });
 
-    useEffect(() => {
-        clearData()
-    })
-
-    return <HomeView />
-}
+  return <HomeView />;
+};

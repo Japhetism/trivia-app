@@ -1,17 +1,13 @@
 import parse from 'html-react-parser';
 
 export const storeData = (storeType: string, data: any) => {
-    localStorage.setItem(storeType, JSON.stringify(data));
-}
+  localStorage.setItem(storeType, JSON.stringify(data));
+};
 
-export const retrieveData = (retrieveType: string) => {
-    return localStorage.getItem(retrieveType) ? JSON.parse(localStorage.getItem(retrieveType) || '') : null;
-}
+export const retrieveData = (retrieveType: string) => (localStorage.getItem(retrieveType) ? JSON.parse(localStorage.getItem(retrieveType) || '') : null);
 
 export const clearData = () => {
-    localStorage.clear();
-}
+  localStorage.clear();
+};
 
-export const htmlParser = (string: string) => {
-    return parse(string);
-}
+export const htmlParser = (string: string) => parse(string);
