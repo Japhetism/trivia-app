@@ -1,5 +1,4 @@
 import React from 'react';
-import DefaultLayout from '../../components/default.layout';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography, Button, Container } from '@material-ui/core';
 import parse from 'html-react-parser';
@@ -39,7 +38,7 @@ const QuizView = (props: any) => {
     
     const {questions, activeQuestion, handleAnswers} = props;
 
-    return <DefaultLayout>
+    return <React.Fragment>
         {questions && questions.map((question: any, index: number) => ( 
             <div hidden={activeQuestion === index ? false : true} key={Math.random()}>
                 <Container key={Math.random()} maxWidth="sm">
@@ -75,7 +74,7 @@ const QuizView = (props: any) => {
                 </Container>
             </div>
         ))}
-    </DefaultLayout>
+    </React.Fragment>
 }
 
 export default QuizView;

@@ -1,5 +1,4 @@
 import React from 'react';
-import DefaultLayout from '../../components/default.layout';
 import { Grid, Typography, makeStyles } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
@@ -21,7 +20,7 @@ const HomeView = () => {
 
     const classes = useStyles();
 
-    return <DefaultLayout>
+    return <React.Fragment>
         <Grid item xs={12} container>
             <Grid item xs container direction="column" spacing={2}>
                 <Grid item xs>
@@ -58,7 +57,7 @@ const HomeView = () => {
                 </Grid>
             </Grid>
         </Grid>
-    </DefaultLayout>
+    </React.Fragment>
 }
 
 export default HomeView;

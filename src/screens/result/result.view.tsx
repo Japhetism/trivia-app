@@ -1,5 +1,4 @@
 import React from 'react';
-import DefaultLayout from '../../components/default.layout';
 import { 
     List, ListItem, ListItemIcon, ListItemText, Typography, Grid, makeStyles
 } from '@material-ui/core';
@@ -29,7 +28,7 @@ const ResultView = (props: any) => {
 
     const { scores, answers } = props;
 
-    return <DefaultLayout>
+    return <React.Fragment>
         <Grid item xs={12} container>
             <Grid item xs container direction="column" spacing={2}>
                 <Grid item xs>
@@ -65,7 +64,7 @@ const ResultView = (props: any) => {
                 </Grid>
             </Grid>
         </Grid>
-    </DefaultLayout>
+    </React.Fragment>
 }
 
 export default ResultView;
