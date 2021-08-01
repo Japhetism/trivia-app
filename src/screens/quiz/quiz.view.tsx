@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, Typography, Button, Container, makeStyles } from '@material-ui/core';
 import { htmlParser } from '../../utils/helper';
 import Loader from '../../components/loader';
+import Error from '../../components/error';
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -36,10 +37,11 @@ const QuizView = (props: any) => {
 
     const classes = useStyles();
     
-    const {questions, activeQuestion, handleAnswers, isLoading} = props;
+    const {questions, activeQuestion, handleAnswers, isLoading, error, reload} = props;
 
     return <React.Fragment>
         {isLoading && <Loader />}
+        {error && <Error reload={reload} />}
         {questions && questions.map((question: any, index: number) => ( 
             <div hidden={activeQuestion === index ? false : true} key={Math.random()}>
                 <Container key={Math.random()} maxWidth="sm">
