@@ -5,7 +5,7 @@ import {
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import { Link } from 'react-router-dom';
-import parse from 'html-react-parser';
+import { htmlParser } from '../../utils/helper';
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -48,7 +48,7 @@ const ResultView = (props: any) => {
                             <ListItemIcon>
                                 {answer.answer === 'correct' ? <AddIcon /> : <RemoveIcon />}
                             </ListItemIcon>
-                            <ListItemText primary={parse(answer.question)} />
+                            <ListItemText primary={htmlParser(answer.question)} />
                         </ListItem>
                     ))}
                     </List>

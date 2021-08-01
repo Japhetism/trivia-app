@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography, Button, Container } from '@material-ui/core';
-import parse from 'html-react-parser';
+import { htmlParser } from '../../utils/helper';
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -55,7 +55,7 @@ const QuizView = (props: any) => {
                         <Grid item xs container direction="column" spacing={2}>
                             <Grid item xs>
                                 <Typography gutterBottom variant="subtitle1" className={classes.questionText}>
-                                    {parse(question.question)}
+                                    {htmlParser(question.question)}
                                 </Typography>
                                 <Button variant="outlined" className={classes.button} onClick={() => handleAnswers(index, question, "True")}>True</Button>
                                 <Button variant="outlined" className={classes.button} onClick={() => handleAnswers(index, question, "False")}>False</Button>
