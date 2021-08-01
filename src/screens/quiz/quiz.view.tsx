@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import DefaultLayout from '../../components/default.layout';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography, Button, Container } from '@material-ui/core';
+import parse from 'html-react-parser';
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -37,44 +38,48 @@ const QuizView = (props: any) => {
     const classes = useStyles();
     const [questions, setQuestions] = useState([]);
 
+    const {activeQuestion, handleAnswers} = props;
+
     useEffect(()=> {
         const questions = props?.questions?.questionsData?.questions?.results;
         setQuestions(questions);
     }, [props]);
 
     return <DefaultLayout>
-        {questions && questions.map((question, index) => ( 
-            <Container key={Math.random()} maxWidth="sm">
-                <Grid item xs={12} container>
-                    <Grid item xs container direction="column" spacing={2}>
-                        <Grid item xs>
-                            <Typography gutterBottom variant="h3" className={classes.title}>
-                                Entertainment: Video Games
-                            </Typography>
+        {questions && questions.map((question: any, index: number) => ( 
+            <div hidden={activeQuestion === index ? false : true} key={Math.random()}>
+                <Container key={Math.random()} maxWidth="sm">
+                    <Grid item xs={12} container>
+                        <Grid item xs container direction="column" spacing={2}>
+                            <Grid item xs>
+                                <Typography gutterBottom variant="h3" className={classes.title}>
+                                    {question.category}
+                                </Typography>
+                            </Grid>
                         </Grid>
                     </Grid>
-                </Grid>
-                <Grid item xs={12} sm container className={classes.question}>
-                    <Grid item xs container direction="column" spacing={2}>
-                        <Grid item xs>
-                            <Typography gutterBottom variant="subtitle1" className={classes.questionText}>
-                                Unturned originally started as a Roblox game.
-                            </Typography>
-                            <Button variant="outlined" className={classes.button}>True</Button>
-                            <Button variant="outlined" className={classes.button}>False</Button>
+                    <Grid item xs={12} sm container className={classes.question}>
+                        <Grid item xs container direction="column" spacing={2}>
+                            <Grid item xs>
+                                <Typography gutterBottom variant="subtitle1" className={classes.questionText}>
+                                    {parse(question.question)}
+                                </Typography>
+                                <Button variant="outlined" className={classes.button} onClick={() => handleAnswers(index, question, "True")}>True</Button>
+                                <Button variant="outlined" className={classes.button} onClick={() => handleAnswers(index, question, "False")}>False</Button>
+                            </Grid>
                         </Grid>
                     </Grid>
-                </Grid>
-                <Grid item xs={12} container className={classes.questionNumberContainer}>
-                    <Grid item xs container direction="column" spacing={2}>
-                        <Grid item xs>
-                            <Typography gutterBottom variant="subtitle1" className={classes.questionNumber}>
-                                {`${index + 1} of 10`}
-                            </Typography>
+                    <Grid item xs={12} container className={classes.questionNumberContainer}>
+                        <Grid item xs container direction="column" spacing={2}>
+                            <Grid item xs>
+                                <Typography gutterBottom variant="subtitle1" className={classes.questionNumber}>
+                                    {`${index + 1} of 10`}
+                                </Typography>
+                            </Grid>
                         </Grid>
                     </Grid>
-                </Grid>
-            </Container>
+                </Container>
+            </div>
         ))}
     </DefaultLayout>
 }
