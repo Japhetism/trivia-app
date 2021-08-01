@@ -8,16 +8,20 @@ import { clearData } from '../../utils/helper';
 export const QuizContainer = (props: any) => {
 
     const dispatch = useDispatch();
-    const defaultState = useSelector((state) => state);
+    const defaultState = useSelector((state: any) => state);
     const [activeQuestion, setActiveQuestion] = useState(0);
     const [answers, setAnswers] = useState([]);
-    const [scores, setScores] = useState(0);
-    const [totalQuestions, setTotalQuestions] = useState(0);
+    const [questions, setQuestions] = useState([]);
 
     useEffect(() => {
         clearData();
         QuestionsService.fetchQuestions(dispatch);
     }, [dispatch]);
+
+    useEffect(() => {
+        const questions = defaultState?.questionsData?.questions?.results;
+        setQuestions(questions);
+    }, [defaultState])
 
     const handleAnswers = (index: number, question: any, answer: string) => {
         const previousAnswers = answers as any;
@@ -27,19 +31,17 @@ export const QuizContainer = (props: any) => {
         }
         previousAnswers.push(newAnswer)
         setAnswers(previousAnswers);
-        setScores(question.correct_answer === answer ? scores + 1 : scores);
         setActiveQuestion(index + 1);
 
-        if (index + 1 === totalQuestions) {
+       if (index + 1 === questions.length) {
             redirectToResult();
         }
     }
 
     const redirectToResult = () => {
-        storeData('scores', scores);
         storeData('answers', answers);
         props.history.push("/result");
     }
 
-    return <QuizView questions={defaultState} activeQuestion={activeQuestion} handleAnswers={handleAnswers} setTotalQuestions={setTotalQuestions} />
+    return <QuizView questions={questions} activeQuestion={activeQuestion} handleAnswers={handleAnswers} />
 }

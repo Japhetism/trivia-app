@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import DefaultLayout from '../../components/default.layout';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography, Button, Container } from '@material-ui/core';
@@ -36,15 +36,8 @@ const useStyles = makeStyles((theme) => ({
 const QuizView = (props: any) => {
 
     const classes = useStyles();
-    const [questions, setQuestions] = useState([]);
-
-    const {activeQuestion, handleAnswers, setTotalQuestions} = props;
-
-    useEffect(()=> {
-        const questions = props?.questions?.questionsData?.questions?.results;
-        setQuestions(questions);
-        setTotalQuestions(questions?.length);
-    }, [props]);
+    
+    const {questions, activeQuestion, handleAnswers} = props;
 
     return <DefaultLayout>
         {questions && questions.map((question: any, index: number) => ( 
@@ -74,7 +67,7 @@ const QuizView = (props: any) => {
                         <Grid item xs container direction="column" spacing={2}>
                             <Grid item xs>
                                 <Typography gutterBottom variant="subtitle1" className={classes.questionNumber}>
-                                    {`${index + 1} of 10`}
+                                    {`${index + 1} of ${questions.length}`}
                                 </Typography>
                             </Grid>
                         </Grid>

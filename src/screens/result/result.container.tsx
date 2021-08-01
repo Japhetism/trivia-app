@@ -8,10 +8,9 @@ export const ResultContainer = () => {
     const [answers, setAnswers] = useState([]);
 
     useEffect(() => {
-        const scores = retrieveData('scores');
         const answers = retrieveData('answers');
-
-        setScores(scores);
+        const correctAnswers = answers.filter((item: any) => item.answer === "correct").length;
+        setScores(correctAnswers);
         setAnswers(answers);
     }, [])
 
